@@ -2,7 +2,7 @@ import os
 import discord
 import requests
 
-API_URL = "https://meme-api.herokuapp.com/gimme"
+API_URL = "meme-api.com"
 
 # Initialize the bot
 intents = discord.Intents.default()
