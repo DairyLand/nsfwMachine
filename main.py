@@ -3,9 +3,10 @@ from dotenv import load_dotenv
 import discord
 import requests
 
-load_dotenv()
+API_URL = "https://meme-api.com/gimme"
 
-API_URL = "meme-api.com"
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize the bot
 intents = discord.Intents.default()
@@ -14,12 +15,14 @@ client = discord.Client(intents=intents)
 
 
 # Event: on_ready
-def on_ready():
+@client.event
+async def on_ready():
     print(f"We have logged in as {client.user}")
 
 
 # Event: on_message
-def on_message(message):
+@client.event
+async def on_message(message):
     if message.author == client.user:
         return
 
@@ -29,14 +32,9 @@ def on_message(message):
             response = requests.get(API_URL)
             data = response.json()
             meme_url = data["url"]
-            client.loop.create_task(message.channel.send(meme_url))
+            await message.channel.send(meme_url)
         except Exception as e:
-            client.loop.create_task(message.channel.send("Sorry, couldn't fetch a meme at the moment."))
-
-
-# Register events
-client.event(on_ready)
-client.event(on_message)
+            await message.channel.send("Sorry, couldn't fetch a meme at the moment.")
 
 
 # Get the bot token from the environment variable
@@ -44,4 +42,3 @@ bot_token = os.environ.get("BOT_TOKEN")
 
 # Run the bot
 client.run(bot_token)
-
