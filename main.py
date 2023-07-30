@@ -1,6 +1,9 @@
 import os
+from dotenv import load_dotenv
 import discord
 import requests
+
+load_dotenv()
 
 API_URL = "meme-api.com"
 
