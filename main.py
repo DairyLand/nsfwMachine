@@ -2,11 +2,12 @@ import os
 from dotenv import load_dotenv
 import discord
 import requests
+import asyncio
+load_dotenv
 
 API_URL = "https://meme-api.com/gimme"
 
-# Load environment variables from .env file
-load_dotenv()
+
 
 # Initialize the bot
 intents = discord.Intents.default()
