@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 import aiohttp
 
-API_URL = "https://meme-api.herokuapp.com/gimme"
+API_URL = "https://meme-api.com/gimme"
 
 # Load environment variables from .env file
 load_dotenv()
