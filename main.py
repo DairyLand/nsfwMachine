@@ -48,7 +48,7 @@ async def on_message(message):
 
 
 # Get the bot token from the environment variable
-bot_token = os.environ.get("BOT_TOKEN")
+bot_token = os.getenv("BOT_TOKEN")
 
 # Run the bot
 client.run(bot_token)
