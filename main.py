@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 import aiohttp
 
-API_URL = "https://meme-api.com/gimme"
+API_URL = "https://meme-api.herokuapp.com/gimme"
 
 # Load environment variables from .env file
 load_dotenv()
@@ -38,7 +38,11 @@ async def on_message(message):
                 async with session.get(API_URL) as response:
                     data = await response.json()
                     meme_url = data["url"]
-                    await message.channel.send(meme_url)
+                    
+                    # Create an embed to send the meme
+                    embed = discord.Embed(title="Here's a meme for you!", color=0x00ff00)
+                    embed.set_image(url=meme_url)
+                    await message.channel.send(embed=embed)
         except Exception as e:
             await message.channel.send("Sorry, couldn't fetch a meme at the moment.")
 
@@ -48,3 +52,4 @@ bot_token = os.environ.get("BOT_TOKEN")
 
 # Run the bot
 client.run(bot_token)
+
