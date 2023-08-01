@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 import aiohttp
 
-API_URL = "https://meme-api.com/gimme"
+API_URL = "https://meme-api.herokuapp.com/gimme"
 
 # Load environment variables from .env file
 load_dotenv()
@@ -13,8 +13,10 @@ intents = discord.Intents.default()
 intents.messages = True
 client = discord.Client(intents=intents)
 
+
 # Create an aiohttp session to reuse connections
-session = aiohttp.ClientSession()
+async def create_session():
+    return aiohttp.ClientSession()
 
 
 # Event: on_ready
@@ -32,10 +34,11 @@ async def on_message(message):
     if message.content.startswith("!meme"):
         # Fetch meme from the API using aiohttp
         try:
-            async with session.get(API_URL) as response:
-                data = await response.json()
-                meme_url = data["url"]
-                await message.channel.send(meme_url)
+            async with create_session() as session:
+                async with session.get(API_URL) as response:
+                    data = await response.json()
+                    meme_url = data["url"]
+                    await message.channel.send(meme_url)
         except Exception as e:
             await message.channel.send("Sorry, couldn't fetch a meme at the moment.")
 
@@ -45,9 +48,3 @@ bot_token = os.environ.get("BOT_TOKEN")
 
 # Run the bot
 client.run(bot_token)
-
-# Close the aiohttp session when the bot is stopped
-async def on_shutdown():
-    await session.close()
-
-client.loop.run_until_complete(on_shutdown())
