@@ -23,7 +23,7 @@ async def create_session():
 # Event: on_ready
 @client.event
 async def on_ready():
-    print(f"We have logged in as {client.user}")
+    print(f"fired up and ready {client.user}")
 
 
 # Event: on_message
