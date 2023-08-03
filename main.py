@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import discord
 import aiohttp
 import json
+import io
 
 API_URL = "https://meme-api.com/gimme"
 
