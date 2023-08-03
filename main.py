@@ -17,8 +17,14 @@ client = discord.Client(intents=intents)
 
 
 # Create an aiohttp session to reuse connections
-async def create_session():
-    return aiohttp.ClientSession()
+#async def create_session():
+#   return aiohttp.ClientSession()
+async with aiohttp.ClientSession() as session:
+    async with session.get(my_url) as resp:
+        if resp.status != 200:
+            return await channel.send('Could not download file...')
+        data = io.BytesIO(await resp.read())
+        await channel.send(file=discord.File(data, 'cool_image.png'))
 
 
 # Event: on_ready
