@@ -16,15 +16,10 @@ intents.messages = True
 client = discord.Client(intents=intents)
 
 
-# Create an aiohttp session to reuse connections
-#async def create_session():
-#   return aiohttp.ClientSession()
 async with aiohttp.ClientSession() as session:
-    async with session.get(API_URL) as resp:
-        if resp.status != 200:
-            return await channel.send('Could not download file...')
-        data = io.BytesIO(await resp.read())
-        await channel.send(file=discord.File(data, 'cool_image.png'))
+    async with session.get('https://meme-api.com/gimme') as r:
+        if r.status == 200:
+            js = await r.json()
 
 
 # Event: on_ready
