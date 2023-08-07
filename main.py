@@ -20,7 +20,7 @@ client = discord.Client(intents=intents)
 #async def create_session():
 #   return aiohttp.ClientSession()
 async with aiohttp.ClientSession() as session:
-    async with session.get(my_url) as resp:
+    async with session.get(API_URL) as resp:
         if resp.status != 200:
             return await channel.send('Could not download file...')
         data = io.BytesIO(await resp.read())
