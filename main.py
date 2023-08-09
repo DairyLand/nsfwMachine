@@ -25,5 +25,3 @@ async def test(ctx):
 
 client.run(bot_token)
 
-#in the discord.py docs there is a frequently asked question on how to use
-# aihttp
