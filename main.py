@@ -8,6 +8,9 @@ API_URL = "https://meme-api.com/gimme"
 # Load environment variables from .env file
 load_dotenv()
 
+# Get the bot token from the environment variable
+bot_token = os.getenv("BOT_TOKEN")
+
 # Initialize the bot
 intents = discord.Intents.default()
 intents.messages = True
@@ -48,8 +51,7 @@ async def on_message(message):
             await message.channel.send("Sorry, couldn't fetch a meme at the moment.")
 
 
-# Get the bot token from the environment variable
-bot_token = os.getenv("BOT_TOKEN")
+
 
 # Run the bot
 client.run(bot_token)
