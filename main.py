@@ -16,7 +16,7 @@ bot_token = os.getenv("BOT_TOKEN")
 # Initialize the bot
 intents = discord.Intents.all()
 intents.messages = True
-client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix='!', intents=intents)
 
 
 async with aiohttp.ClientSession() as session:
