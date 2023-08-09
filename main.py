@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import discord
 import aiohttp
-
+# i neeed to define intents better and add the discord import for commands
 API_URL = "https://meme-api.com/gimme"
 
 # Load environment variables from .env file
