@@ -19,9 +19,16 @@ async def on_ready():
     print(f"coming online {client.user} !")
 
 @client.command()
-async def test(ctx):
+async def meme(ctx):
     async with aiohttp.ClientSession() as session:
-        async with session.get
+        async with session.get('https://meme-api.com/gimme') as r:
+            if r.status == 200:
+                data = await r.json()
+                meme_url = data['url']
+                await ctx.send(meme_url)
+            else:
+                await ctx.send('Failed to fetch meme from the API.')
+       
 
 client.run(bot_token)
 
