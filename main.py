@@ -25,3 +25,4 @@ async def test(ctx):
 
 client.run(bot_token)
 
+#this is just some very basic code to see if the api is working 
