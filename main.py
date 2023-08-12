@@ -40,6 +40,21 @@ async def cat(ctx):
             else:
                 await ctx.send('Failed to fetch cat from the API.')
                 
+@client.command()
+async def catbomb(ctx, num_images: int = 5):
+    if num_images > 10:  # Limit the number of images to a reasonable value
+        num_images = 10
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f'https://api.thecatapi.com/v1/images/search?limit={num_images}') as r:
+            if r.status == 200:
+                data = await r.json()
+                cat_urls = [entry['url'] for entry in data]
+                for cat_url in cat_urls:
+                    await ctx.send(cat_url)
+            else:
+                await ctx.send('Failed to fetch cat images from the API.')
+                
                 
 
        
