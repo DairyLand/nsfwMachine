@@ -61,7 +61,16 @@ async def on_message(message):
         return
 
     if message.content.startswith('jordan'):
-        await message.channel.send('I\'m 5\'11\\" but that pic makes me look short')               
+        await message.channel.send('I\'m 5\'11\\" but that pic makes me look short')
+        
+@client.event
+async def on_message(message):
+    if message.author.id == 305383856364584960:  # Replace TARGET_USER_ID with the actual user's ID
+        emoji = '🏳️‍🌈'  # Replace this with the Unicode representation of the emoji you want
+        await message.add_reaction(emoji)
+
+    await client.process_commands(message)  # This line ensures that the bot's commands still work
+               
 
        
 
