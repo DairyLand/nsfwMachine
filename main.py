@@ -16,7 +16,7 @@ client = commands.Bot(command_prefix='!', intents=intents)
 
 @client.event
 async def on_ready():
-    print(f"coming online {client.user} !")
+    print(f"{client.user} has come online")
 
 @client.command()
 async def meme(ctx):
@@ -28,8 +28,20 @@ async def meme(ctx):
                 await ctx.send(meme_url)
             else:
                 await ctx.send('Failed to fetch meme from the API.')
+                
+@client.command()
+async def cat(ctx):
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://api.thecatapi.com/v1/images/search') as r:
+            if r.status == 200:
+                data = await r.json()
+                cat_url = data[0]['url']
+                await ctx.send(cat_url)
+            else:
+                await ctx.send('Failed to fetch cat from the API.')
+                
+                
+
        
 
 client.run(bot_token)
-
-#this is just some very basic code to see if the api is working 
