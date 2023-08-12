@@ -54,8 +54,14 @@ async def catbomb(ctx, num_images: int = 5):
                     await ctx.send(cat_url)
             else:
                 await ctx.send('Failed to fetch cat images from the API.')
-                
-                
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('jordan'):
+        await message.channel.send('I\'m 5\'11\\" but that pic makes me look short')               
 
        
 
