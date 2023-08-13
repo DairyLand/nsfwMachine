@@ -71,7 +71,7 @@ async def on_message(message):
 
     await client.process_commands(message)  # This line ensures that the bot's commands still work
                
-
+#working?
        
 
 client.run(bot_token)
