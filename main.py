@@ -14,9 +14,11 @@ intents = discord.Intents.all()
 intents.messages = True
 client = commands.Bot(command_prefix='!', intents=intents)
 
+
 @client.event
 async def on_ready():
     print(f"{client.user} has come online")
+
 
 @client.command()
 async def meme(ctx):
@@ -28,7 +30,8 @@ async def meme(ctx):
                 await ctx.send(meme_url)
             else:
                 await ctx.send('Failed to fetch meme from the API.')
-                
+
+
 @client.command()
 async def cat(ctx):
     async with aiohttp.ClientSession() as session:
@@ -39,7 +42,8 @@ async def cat(ctx):
                 await ctx.send(cat_url)
             else:
                 await ctx.send('Failed to fetch cat from the API.')
-                
+
+
 @client.command()
 async def catbomb(ctx, num_images: int = 5):
     if num_images > 10:  # Limit the number of images to a reasonable value
@@ -55,6 +59,19 @@ async def catbomb(ctx, num_images: int = 5):
             else:
                 await ctx.send('Failed to fetch cat images from the API.')
 
+
+@client.command()
+async def hentai(ctx):
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://api.hentaicord.net/image/hentai/ahegao') as r:
+            if r.status == 200:
+                data = await r.json()
+                hentai_url = data[0]['url']
+                await ctx.send(hentai_url)
+            else:
+                await ctx.send('Failed to fetch cat from the API.')
+
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -62,16 +79,18 @@ async def on_message(message):
 
     if message.content.startswith('jordan'):
         await message.channel.send('I\'m 5\'11\\" but that pic makes me look short')
-        
+
+
 @client.event
 async def on_message(message):
     if message.author.id == 305383856364584960:  # Replace TARGET_USER_ID with the actual user's ID
         emoji = '🏳️‍🌈'  # Replace this with the Unicode representation of the emoji you want
         await message.add_reaction(emoji)
 
-    await client.process_commands(message)  # This line ensures that the bot's commands still work
-               
-#working?
-       
+    # This line ensures that the bot's commands still work
+    await client.process_commands(message)
+
+# working?
+
 
 client.run(bot_token)
