@@ -61,15 +61,15 @@ async def catbomb(ctx, num_images: int = 5):
 
 
 @client.command()
-async def hentai(ctx):
+async def nuts(ctx):
     async with aiohttp.ClientSession() as session:
-        async with session.get('https://api.hentaicord.net/image/hentai/ahegao') as r:
+        async with session.get('https://meme-api.com/gimme/nutscapes') as r:
             if r.status == 200:
                 data = await r.json()
-                hentai_url = data[0]['url']
-                await ctx.send(hentai_url)
+                meme_url = data['url']
+                await ctx.send(meme_url)
             else:
-                await ctx.send('Failed to fetch cat from the API.')
+                await ctx.send('Failed to fetch meme from the API.')
 
 
 @client.event
