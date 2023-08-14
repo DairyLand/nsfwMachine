@@ -92,7 +92,7 @@ async def vroom(ctx):
         await ctx.send(meme_url)
       else:
         await ctx.send('Failed to fetch meme from the API.') 
-        
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -104,13 +104,21 @@ async def on_message(message):
 
 @client.event
 async def on_message(message):
-    if message.author.id == 305383856364584960:  # Replace TARGET_USER_ID with the actual user's ID
-        emoji = '🏳️‍🌈'  # Replace this with the Unicode representation of the emoji you want
+    author_emojis = {
+        305383856364584960: '🏳️‍🌈', # jordan
+        207334685741678598: '💅', # maddie
+        444595872190300161: '🏳️‍⚧️', # hunter
+        349715601364746251: '♿', #joey
+    
+        # Add more user IDs and emojis here
+    }
+
+    author_id = message.author.id
+    if author_id in author_emojis:
+        emoji = author_emojis[author_id]
         await message.add_reaction(emoji)
 
-    # This line ensures that the bot's commands still work
     await client.process_commands(message)
-
 # working?
 
 
