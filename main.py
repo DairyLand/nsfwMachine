@@ -115,6 +115,28 @@ async def ow34(ctx):
             else:
                 await ctx.send('Failed to fetch meme from the API.')
 
+@client.command()
+async def commands(ctx):
+    command_list = [
+        "!meme - Get a random meme.",
+        "!vroom - Get a car pic",
+        "!cat - Get a random cat image.",
+        "!catbomb [num_images] - Get multiple random cat images. (Max 10)",
+        "!nuts - Get a nutscape ",
+        "!joeysgf - Get some hentai",
+        "!ow - Get an Overwatch meme.",
+        "!ow34 - Get Overwatch porn."
+    ]
+
+    formatted_commands = '\n'.join(command_list)
+    embed = discord.Embed(
+        title="Available Commands",
+        description=formatted_commands,
+        color=discord.Color.blue()
+    )
+    
+    await ctx.send(embed=embed)
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -141,7 +163,5 @@ async def on_message(message):
         await message.add_reaction(emoji)
 
     await client.process_commands(message)
-# working?
-
 
 client.run(bot_token)
